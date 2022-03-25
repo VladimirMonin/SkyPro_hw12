@@ -1,10 +1,17 @@
-#Имортируем класс блюпринта
+# Имортируем класс блюпринта
 from flask import Blueprint
 
-#Рожаем новый блюпринт, выбираем ему имя :)
-main_blueprint = Blueprint('main_blueprint', __name__)
+# Импортируем шаблонизатор
+from flask import render_template
 
-#Создаем вьюшку (в декораторе блюпринт а не app!)
+# Рожаем новый блюпринт, выбираем ему имя :)
+# Добавляем настройку кастомной папки с шаблонами
+main_blueprint = Blueprint('main_blueprint', __name__, template_folder='templates')
+
+
+# Создаем вьюшку главной страницы (в декораторе блюпринт а не app!)
 @main_blueprint.route('/')
 def main():
-    return 'Это блюпринт, детка!'
+    return render_template('index.html')
+
+# С
