@@ -1,7 +1,7 @@
 import json
 
 
-def load_post_json(filename='posts.json'):
+def load_posts_json(filename='posts.json'):
     """
     Функция читает json с вопросами и возвращает словарь для игры
     :param filename: По умолчанию questions.json
