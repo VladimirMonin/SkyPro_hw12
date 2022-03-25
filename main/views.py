@@ -1,5 +1,5 @@
 # Имортируем класс блюпринта
-from flask import Blueprint
+from flask import Blueprint, request
 
 # Импортируем шаблонизатор
 from flask import render_template
@@ -14,4 +14,8 @@ main_blueprint = Blueprint('main_blueprint', __name__, template_folder='template
 def main():
     return render_template('index.html')
 
-# С
+# Создаем вьюшку страницы поисковой выдачи (post_list.html)
+@main_blueprint.route('/search/')
+def search_page():
+    search = request.args.get('s')
+    return f'Очевидно, что вы искали {search}'
