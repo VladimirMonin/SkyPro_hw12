@@ -18,4 +18,5 @@ def main():
 @main_blueprint.route('/search/')
 def search_page():
     search = request.args.get('s')
-    return f'Очевидно, что вы искали {search}'
+    # Тут надо функцию поиска по json нужных постов
+    return render_template('post_list.html') # Прописать передачу данных
