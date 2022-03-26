@@ -13,3 +13,7 @@ loader_blueprint = Blueprint('loader_blueprint', __name__, template_folder='temp
 @loader_blueprint.route('/')
 def main():
     return render_template('post_form.html')
+
+@loader_blueprint.route('/')
+def nmain():
+    return render_template('post_uploaded.html')
