@@ -10,10 +10,11 @@ from flask import render_template
 loader_blueprint = Blueprint('loader_blueprint', __name__, template_folder='templates')
 
 # Создаем вьюшку тестовую страницы (в декораторе блюпринт а не app!)
-@loader_blueprint.route('/')
+@loader_blueprint.route('/loader/')
 def main():
     return render_template('post_form.html')
 
-@loader_blueprint.route('/')
+@loader_blueprint.route('/loaded/')
 def nmain():
-    return render_template('post_uploaded.html')
+    picture = request.files.get('picture').filename
+    return render_template('post_uploadad.html', picture=picture)

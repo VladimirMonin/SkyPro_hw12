@@ -9,8 +9,9 @@ UPLOAD_FOLDER = "uploads/images"
 app = Flask(__name__)
 
 app.register_blueprint(main_blueprint, url_prefix="/")
-app.register_blueprint(loader_blueprint, url_prefix="/loader/")
+app.register_blueprint(loader_blueprint, url_prefix="/")
 
+app.run()
 # @app.route("/")
 # def page_index():
 #     pass
@@ -36,5 +37,5 @@ app.register_blueprint(loader_blueprint, url_prefix="/loader/")
 #     return send_from_directory("uploads", path)
 
 
-app.run()
+
 
