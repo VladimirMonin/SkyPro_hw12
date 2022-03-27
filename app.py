@@ -3,8 +3,7 @@ from flask import Flask, request, render_template, send_from_directory
 from main.main_views import main_blueprint
 from loader.loader_views import loader_blueprint
 
-POST_PATH = "posts.json"
-UPLOAD_FOLDER = "uploads/images"
+from constant import *
 
 app = Flask(__name__)
 

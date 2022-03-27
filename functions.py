@@ -1,7 +1,7 @@
 import json
+from constant import *
 
-
-def load_posts_json(filename=POST_PATH):
+def load_posts_json(filename=JSON_FILE):
     """
     Функция читает json с вопросами и возвращает словарь для игры
     :param filename: По умолчанию questions.json
@@ -28,5 +28,5 @@ def dump_posts_json(picture_path, content):
     data = load_posts_json()
     for_append = {"pic": picture_path, "content": content}
     data.append(for_append)
-    with open(POST_PATH, 'w', encoding='UTF-8') as f:
+    with open(JSON_FILE, 'w', encoding='UTF-8') as f:
         json.dump(data, f, indent=4, ensure_ascii=False)

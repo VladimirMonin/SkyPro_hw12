@@ -1,17 +1,18 @@
 # Имортируем класс блюпринта
 from flask import Blueprint, request
-# Импортируем функции ?
+# Импортируем константы
+from constant import *
 
 # Импортируем шаблонизатор
 from flask import render_template
 
 # Рожаем новый блюпринт, выбираем ему имя :)
 # Добавляем настройку кастомной папки с шаблонами
-loader_blueprint = Blueprint('loader_blueprint', __name__, template_folder='templates')
+loader_blueprint = Blueprint('loader_blueprint', __name__, template_folder='templates', url_prefix='/post')
 
 
 # Создаем вьюшку тестовую страницы (в декораторе блюпринт а не app!)
-@loader_blueprint.route('/loader/')
+@loader_blueprint.route('/form/')
 def main():
     return render_template('post_form.html')
 
@@ -28,5 +29,6 @@ def nmain():
     filename = picture.filename
 
     # Сохраняем картинку под родным именем в папку uploads
-    picture.save(f"./static/uploads/images/{filename}")
-    return render_template('post_uploaded.html', picture=filename, post_text=post_text)
+    full_picture_path = f".{IMAGES_FOLDER}{filename}"
+    picture.save(full_picture_path)
+    return render_template('post_uploaded.html', picture=full_picture_path, post_text=post_text)
