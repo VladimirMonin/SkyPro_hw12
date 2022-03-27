@@ -1,6 +1,7 @@
 import json
 from constant import *
 
+
 def load_posts_json(filename=JSON_FILE):
     """
     Функция читает json с вопросами и возвращает словарь для игры

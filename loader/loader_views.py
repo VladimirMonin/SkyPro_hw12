@@ -29,6 +29,6 @@ def nmain():
     filename = picture.filename
 
     # Сохраняем картинку под родным именем в папку uploads
-    full_picture_path = f".{IMAGES_FOLDER}{filename}"
+    full_picture_path = f"uploads/images/{filename}"
     picture.save(full_picture_path)
-    return render_template('post_uploaded.html', picture=full_picture_path, post_text=post_text)
+    return render_template('post_uploaded.html', picture=f'/post/loaded/{filename}', post_text=post_text)
