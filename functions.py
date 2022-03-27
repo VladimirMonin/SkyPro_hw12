@@ -1,7 +1,7 @@
 import json
 
 
-def load_posts_json(filename='posts.json'):
+def load_posts_json(filename=POST_PATH):
     """
     Функция читает json с вопросами и возвращает словарь для игры
     :param filename: По умолчанию questions.json
@@ -14,11 +14,19 @@ def load_posts_json(filename='posts.json'):
 
 
 def search_post(posts_list, search_post):
-# ВОПРОС. В КАКОМ ВАРИАНТЕ ПРАВИЛЬНО ЭТО ДЕЛАТЬ? Выдавать во вьюшку готовый результат, или весь список, а поиск делать циклом в HTML?
-# В ЛЮБОМ ли варианте обработка будет на сервере? Или если отдать в HTML - весь json пойдет в браузер юзера и там будет перебор циклом? Это безопасно?
+    # ВОПРОС. В КАКОМ ВАРИАНТЕ ПРАВИЛЬНО ЭТО ДЕЛАТЬ? Выдавать во вьюшку готовый результат, или весь список, а поиск делать циклом в HTML?
+    # В ЛЮБОМ ли варианте обработка будет на сервере? Или если отдать в HTML - весь json пойдет в браузер юзера и там будет перебор циклом? Это безопасно?
     """Функция принимает список постов и производит поиск по вхождению строки"""
     result_list = []
     for post in posts_list:
         if search_post.lower() in post['content'].lower():
             result_list.append(post)
     return result_list
+
+
+def dump_posts_json(picture_path, content):
+    data = load_posts_json()
+    for_append = {"pic": picture_path, "content": content}
+    data.append(for_append)
+    with open(POST_PATH, 'w', encoding='UTF-8') as f:
+        json.dump(data, f, indent=4, ensure_ascii=False)
