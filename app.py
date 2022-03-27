@@ -8,39 +8,13 @@ from constant import *
 app = Flask(__name__)
 
 app.register_blueprint(main_blueprint, url_prefix="/")
-app.register_blueprint(loader_blueprint, url_prefix="/")
+app.register_blueprint(loader_blueprint)
 
-@app.route(f'/loaded/<path:path>/')
+@app.route(f'/post/loaded/<path:path>/')
 def img_dir(path):
     return send_from_directory(IMAGES_FOLDER, path)
 
 app.run(debug=True)
-
-
-# @app.route("/")
-# def page_index():
-#     pass
-
-
-# @app.route("/list")
-# def page_tag():
-#     pass
-#
-#
-# @app.route("/post", methods=["GET", "POST"])
-# def page_post_form():
-#     pass
-#
-#
-# @app.route("/post", methods=["POST"])
-# def page_post_upload():
-#     pass
-#
-#
-# @app.route("/uploads/<path:path>")
-# def static_dir(path):
-#     return send_from_directory("uploads", path)
-
 
 
 
