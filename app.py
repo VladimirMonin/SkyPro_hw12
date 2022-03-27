@@ -10,7 +10,13 @@ app = Flask(__name__)
 app.register_blueprint(main_blueprint, url_prefix="/")
 app.register_blueprint(loader_blueprint, url_prefix="/")
 
+@app.route(f'{IMAGES_FOLDER}<path:path>')
+def img_dir(path):
+    return send_from_directory(IMAGES_FOLDER, path)
+
 app.run(debug=True)
+
+
 # @app.route("/")
 # def page_index():
 #     pass
