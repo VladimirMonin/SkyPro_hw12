@@ -10,10 +10,14 @@ app = Flask(__name__)
 app.register_blueprint(main_blueprint, url_prefix="/")
 app.register_blueprint(loader_blueprint)
 
-
+# Разрешаем доступ
 @app.route(f'/post/loaded/<path:path>/')
 def img_dir(path):
     return send_from_directory(IMAGES_FOLDER, path)  # СЛЕЕЕЕШ!!!!
 
+
+@app.route(f'/search/<path:path>/')
+def img_dir2(path):
+    return send_from_directory(IMAGES_FOLDER, path)
 
 app.run(debug=True)

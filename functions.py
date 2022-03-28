@@ -21,13 +21,15 @@ def search_post(posts_list, search_post):
     result_list = []
     for post in posts_list:
         if search_post.lower() in post['content'].lower():
+            if 'http' not in post['pic']:
+                post['pic'] = '/search/' + post['pic'].split('/')[-1]
             result_list.append(post)
     return result_list
 
 
-def dump_posts_json(picture_path, content):
+def dump_posts_json(picture_name, content, picture_path=IMAGES_FOLDER):
     data = load_posts_json()
-    for_append = {"pic": picture_path, "content": content}
+    for_append = {"pic": picture_path+picture_name, "content": content}
     data.append(for_append)
     with open(JSON_FILE, 'w', encoding='UTF-8') as f:
         json.dump(data, f, indent=4, ensure_ascii=False)
