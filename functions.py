@@ -1,6 +1,7 @@
 import json
 from constant import *
 
+
 #
 def load_posts_json(filename=JSON_FILE):
     """
@@ -14,10 +15,9 @@ def load_posts_json(filename=JSON_FILE):
         file.close()
         return candidates
     except ValueError:
-        return 'Ошибка чтения файла'
+        return 'Ошибка чтения файла'  # includes simplejson.decoder.JSONDecodeError (согласно стаковерфлоу)
     except FileNotFoundError:
         return 'Ошибка. Файл json не найден'
-
 
 
 # ВОПРОС. В КАКОМ ВАРИАНТЕ ПРАВИЛЬНО ЭТО ДЕЛАТЬ? Выдавать во вьюшку готовый результат, или весь список,
@@ -29,7 +29,8 @@ def search_post(posts_list, search_post):
     result_list = []
     for post in posts_list:
         if search_post.lower() in post['content'].lower():
-            if 'http' not in post['pic']:  # ЕСЛИ в строке нет http то мы уже отдаем не ссылку, а адрес по которому есть доступ к файлам на диске
+            if 'http' not in post[
+                'pic']:  # ЕСЛИ в строке нет http то мы уже отдаем не ссылку, а адрес по которому есть доступ к файлам на диске
                 post['pic'] = '/search/' + post['pic'].split('/')[-1]
             result_list.append(post)
     return result_list
@@ -53,3 +54,10 @@ def dump_posts_json(picture_name, content, picture_path=IMAGES_FOLDER):
         return 'Ошибка чтения файла'
     except FileNotFoundError:
         return 'Ошибка. Файл json не найден'
+
+
+def check_image_ext(image_name, allowed_ext=ALLOWED_IMG_EXTENSIONS):
+    """
+    Проверка расширения картинки на разрешенные
+    """
+    return image_name.split('.')[-1] in allowed_ext

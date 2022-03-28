@@ -7,7 +7,13 @@ from constant import *
 from flask import render_template
 
 # Импортируем функции
-from functions import load_posts_json, dump_posts_json
+from functions import load_posts_json, dump_posts_json, check_image_ext
+
+# Импортируем логирование
+import logging
+
+# Включаем логирование
+logging.basicConfig(encoding='utf-8', level=logging.INFO)
 
 # Рожаем новый блюпринт, выбираем ему имя :)
 # Добавляем настройку кастомной папки с шаблонами
@@ -31,8 +37,13 @@ def get_load_form():
     # Получаем имя файла у загруженного фала
     filename = picture.filename
 
+    # Проверяем расширение картинки
+    if check_image_ext(filename):
     # Сохраняем картинку под родным именем в папку uploads
-    full_picture_path = f"{IMAGES_FOLDER}{filename}"
-    picture.save(full_picture_path)
-    dump_posts_json(filename, post_text)
-    return render_template('post_uploaded.html', picture=f'/post/loaded/{filename}', post_text=post_text)
+        full_picture_path = f"{IMAGES_FOLDER}{filename}"
+        picture.save(full_picture_path)
+        dump_posts_json(filename, post_text)
+        return render_template('post_uploaded.html', picture=f'/post/loaded/{filename}', post_text=post_text)
+    else:
+        logging.info(f'Загружаемый файл не является картиной. Это: {filename.split(".")[-1]}')
+        return '<h1>Посты в РУграм должны быть с картинками! &#9940;</h1>'
